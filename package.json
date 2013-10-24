@@ -1,0 +1,18 @@
+{
+  "name": "qsapi",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app"
+  },
+  "dependencies": {
+    "express": "3.1.0",
+    "ejs": "*",
+    "stylus": "*",
+    "lodash": "~2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "~0.7.10",
+    "jasmine-node": "~1.11.0"
+  }
+}
