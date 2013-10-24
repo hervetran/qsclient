@@ -3,7 +3,7 @@ module.exports = function(app) {
 
   // User routes
   app.get('/', function(req,res,next){
-    res.render('index.html');
+    res.render('index');
   });
 
 };

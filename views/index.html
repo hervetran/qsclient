@@ -1,1 +1,37 @@
-<h1>Hello !</h1>
+<% include header.html %>
+
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                <form class="form-signin">
+                    <h1 class="form-signin-heading">Connect to QS</h1>
+                    <p>
+                        <input type="text" class="form-control" placeholder="Username" autofocus="">
+                    </p>
+                    <p>
+                        <input type="password" class="form-control" placeholder="Password">
+                    </p>
+                    <p>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    </p>
+                    <p>
+                        I don't have an account, i want to <a href="/signup">signup</a>
+                    </p>
+
+                </form>
+
+                <hr>
+
+                <div class="well">
+                    <p>
+                        This project is an experimental work for a master thesis created by <a href="#">Rémy Hannequin</a> and <a href="#">Hervé Tran</a>.
+                    </p>
+                    <p>
+                        This client works with the <a href="https://github.com/rhannequin/qsapi">Quantified Self API</a>.
+                    <p>
+                </div>
+            </div>
+
+        </div>
+
+<% include footer.html %>
