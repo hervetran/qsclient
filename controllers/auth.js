@@ -142,7 +142,9 @@ module.exports = function(app) {
           dataUser = JSON.parse(dataUser);
 
           if(typeof dataUser.error !== 'undefined'){
+
             res.json(500, dataUser);
+
           } else {
             res.render('auth/confirm', {
               locals : {
