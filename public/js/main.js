@@ -1,6 +1,6 @@
 $(function() {
 
-  $('.ajax').submit(function(e){
+/*  $('.ajax').submit(function(e){
 
     var url = $(this).attr('href');
 
@@ -19,6 +19,6 @@ $(function() {
 
     return false;
 
-  });
+  });*/
 
 });

@@ -4,13 +4,6 @@
 <div class="row">
     <div class="col-lg-6 col-lg-offset-3">
         <form action="<%=host%>/signup" id="form-signup" method="post">
-            <% if(typeof errors !== 'undefined') { %>
-            <div class="alert alert-block alert-danger fade in">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4>Oh snap! You got an error!</h4>
-                <p>Please provide : <%=errors%></p>
-            </div>
-            <% } %>
 
             <h1>Signup to QS platform</h1>
 
@@ -35,7 +28,6 @@
 
         </form>
     </div>
-
 </div>
 
 <% include ../footer.html %>

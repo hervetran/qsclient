@@ -44,7 +44,20 @@ module.exports = function(app) {
         dataUser = JSON.parse(dataUser);
 
         if(typeof dataUser.error !== 'undefined'){
-          res.json(500, dataUser);
+
+          res.render('auth/login', {
+            locals : {
+              host : app.get('app-host'),
+              session: req.session,
+              pageInfos: {
+                id: 'page-login',
+                class: '',
+                title: 'QSClient - Login'
+              }
+            },
+            error: 'API message : '+dataUser.error
+          });
+
         } else {
 
           req.session.regenerate(function(){
@@ -112,7 +125,7 @@ module.exports = function(app) {
               }
             },
             user:req.body.user,
-            errors: errMsg
+            error: 'You must provide : ' + errMsg
           });
           return false;
         }
