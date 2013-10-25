@@ -1,5 +1,5 @@
 {
-  "name": "qsapi",
+  "name": "qsclient",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -9,7 +9,8 @@
     "express": "3.1.0",
     "ejs": "*",
     "stylus": "*",
-    "lodash": "~2.1.0"
+    "lodash": "~2.1.0",
+    "validator": "*"
   },
   "devDependencies": {
     "nodemon": "~0.7.10",

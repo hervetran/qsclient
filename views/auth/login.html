@@ -1,0 +1,36 @@
+<% include ../header.html %>
+
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <form action="<%=host%>/login" id="form-login" method="post">
+                    <h1>Connect to QS platform</h1>
+                    <p>
+                        <input type="text" name="user[name]" class="form-control" placeholder="Username" autofocus="">
+                    </p>
+                    <p>
+                        <input type="password" name="user[password]" class="form-control" placeholder="Password">
+                    </p>
+                    <p>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    </p>
+                    <p>
+                        I don't have an account, i want to <a href="/signup">signup</a>
+                    </p>
+                </form>
+
+                <hr>
+
+                <div class="well">
+                    <p>
+                        This project is an experimental work for a master thesis created by <a href="#">Rémy Hannequin</a> and <a href="#">Hervé Tran</a>.
+                    </p>
+                    <p>
+                        This client works with the <a href="https://github.com/rhannequin/qsapi">Quantified Self API</a>.
+                    <p>
+                </div>
+            </div>
+
+        </div>
+
+<% include ../footer.html %>

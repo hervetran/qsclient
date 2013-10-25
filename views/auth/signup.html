@@ -1,0 +1,41 @@
+<% include ../header.html %>
+
+<!-- Example row of columns -->
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3">
+        <form action="<%=host%>/signup" id="form-signup" method="post">
+            <% if(typeof errors !== 'undefined') { %>
+            <div class="alert alert-block alert-danger fade in">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <h4>Oh snap! You got an error!</h4>
+                <p>Please provide : <%=errors%></p>
+            </div>
+            <% } %>
+
+            <h1>Signup to QS platform</h1>
+
+            <p>
+                <input type="text" name="user[name]" class="form-control" value="<%=(typeof user !== 'undefined' && typeof user.name !== 'undefined' ? user.name : '')%>" placeholder="Username" autofocus="">
+            </p>
+            <p>
+                <input type="password" name="user[password]" class="form-control" value="<%=(typeof user !== 'undefined' && typeof user.password !== 'undefined' ? user.password : '')%>" placeholder="Password">
+            </p>
+            <p>
+                <input type="password" name="user[password_confirmation]" class="form-control" value="<%=(typeof user !== 'undefined' && typeof user.password_confirmation !== 'undefined' ? user.password_confirmation : '')%>" placeholder="Confirm password">
+            </p>
+            <p>
+                <input type="email" name="user[email]" class="form-control" value="<%=(typeof user !== 'undefined' && typeof user.email !== 'undefined' ? user.email : '')%>" placeholder="Email">
+            </p>
+            <p>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Create my account</button>
+            </p>
+            <p>
+                I already have an account, please <a href="/login">log me in</a>
+            </p>
+
+        </form>
+    </div>
+
+</div>
+
+<% include ../footer.html %>
