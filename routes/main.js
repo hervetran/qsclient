@@ -6,19 +6,23 @@ module.exports = function(app) {
 
   app.get('/', checkLogin, main.get_index);
 
-  app.get('/login', auth.get_login);
-  app.post('/login', auth.post_login);
-  app.get('/signup', auth.get_signup);
-  app.post('/signup', auth.post_signup);
+  app.get('/login', auth.getLogin);
+  app.post('/login', auth.postLogin);
+  app.get('/signup', auth.getSignup);
+  app.post('/signup', auth.postSignup);
 
-  app.get('/logout', checkLogin, auth.get_logout);
+  app.get('/logout', checkLogin, auth.getLogout);
 
-  function checkLogin (req, res, next) {
-    if (typeof req.session !== 'undefined' && typeof req.session.user !== 'undefined' && typeof req.session.user.access_token !=='undefined') {
-      next();
-    } else {
-      res.redirect("/login");
+  function checkLogin(req, res, next) {
+    if (
+      typeof req.session !== 'undefined' &&
+      typeof req.session.user !== 'undefined' &&
+      typeof req.session.user.access_token !== 'undefined'
+    ) {
+      return next();
     }
+
+    res.redirect("/login");
   }
 
 };

@@ -10,7 +10,7 @@ var app = express();
 var path = __dirname;
 
 function bootApplication(app) {
-  app.configure(function(){
+  app.configure(function() {
     app.set('port', process.env.PORT || 3001);
     app.set('views', path + '/views');
     app.set('view engine', 'html');
@@ -43,11 +43,11 @@ bootApplication(app);
 bootRoutes(app);
 
 app.configure('development', function(){
-  app.use(express.errorHandler())
+  app.use(express.errorHandler());
 });
 
 // Launch server
-http.createServer(app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function() {
   console.log('Express server : Listening on port ' + app.get('port'));
   console.log('\x1B[32mQuantified-self CLIENT ready to go !\x1B[0m');
 });
