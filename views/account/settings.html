@@ -1,0 +1,39 @@
+<% include ../layout/header.html %>
+
+<!-- Example row of columns -->
+<div class="row">
+
+    <% include ../layout/sidebar.html %>
+
+    <div class="col-lg-9">
+
+        <div class="page-header">
+            <h1>Settings <small>- Edit your profile</small></h1>
+        </div>
+
+        <form method="post" action="<%=host%>/account/settings" role="form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" name="user[username]" value="<%=session.user.username%>" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="user[email]" value="<%=session.user.email%>" class="form-control" id="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" name="user[password]" value="<%=session.user.password%>" class="form-control" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="password_confirmation">Password confirmation</label>
+                <input type="password" name="user[password_confirmation]" value="<%=session.user.password%>" class="form-control" id="password_confirmation" placeholder="Password confirmation">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="button" class="btn btn-danger">Delete user</button>
+        </form>
+
+    </div>
+
+</div>
+
+<% include ../layout/footer.html %>

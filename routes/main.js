@@ -2,16 +2,23 @@
 module.exports = function(app) {
 
   var auth = require('../controllers/auth')(app)
-    , main = require('../controllers/main')(app);
+    , index = require('../controllers/index')(app)
+    , settings = require('../controllers/settings')(app);
 
-  app.get('/', checkLogin, main.get_index);
+  // Index
+  app.get('/', checkLogin, index.getIndex);
 
+  // Auth
   app.get('/login', auth.getLogin);
   app.post('/login', auth.postLogin);
   app.get('/signup', auth.getSignup);
   app.post('/signup', auth.postSignup);
-
   app.get('/logout', checkLogin, auth.getLogout);
+
+  // Settings
+  app.get('/account/settings', checkLogin, settings.getSettings);
+  app.post('/account/settings', checkLogin, settings.postSettings);
+  app.get('/account/delete', checkLogin, settings.deleteAccount);
 
   function checkLogin(req, res, next) {
     if (

@@ -17,7 +17,7 @@ module.exports = function(app) {
         session: req.session,
         pageInfos: {
           id: 'page-login',
-          'class': '',
+          class: '',
           title: 'QSClient - Login'
         }
       }
@@ -52,7 +52,7 @@ module.exports = function(app) {
             session: req.session,
             pageInfos: {
               id: 'page-login',
-              'class': '',
+              class: '',
               title: 'QSClient - Login'
             }
           },
@@ -60,9 +60,8 @@ module.exports = function(app) {
         });
       }
 
-      // Everything is fine, let the user log in
       req.session.regenerate(function() {
-        req.session.user =  dataUser;
+        req.session.user = dataUser;
         res.redirect('/');
       });
 
@@ -89,7 +88,7 @@ module.exports = function(app) {
         session: req.session,
         pageInfos: {
           id: 'page-signup',
-          'class': '',
+          class: '',
           title: 'QSClient - Signup'
         }
       }
@@ -121,7 +120,7 @@ module.exports = function(app) {
             session: req.session,
             pageInfos: {
               id: 'page-signup',
-              'class': '',
+              class: '',
               title: 'QSClient - Signup'
             }
           },
@@ -152,7 +151,7 @@ module.exports = function(app) {
             session: req.session,
             pageInfos: {
               id: 'page-confirm',
-              'class': '',
+              class: '',
               title: 'QSClient - Signup'
             }
           },

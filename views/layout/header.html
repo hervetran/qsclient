@@ -3,14 +3,7 @@
 <head>
     <title><%=pageInfos.title%></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="../../assets/js/html5shiv.js"></script>
-    <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 <body>
 
@@ -26,19 +19,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
+                    <li class="<%=(pageInfos.id === 'page-index' ? 'active': '') %>"><a href="/">Home</a></li>
                 </ul>
                 <% if(typeof session !== 'undefined' && typeof session.user !== 'undefined' && typeof session.user.access_token !=='undefined') { %>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Logged in as <%=session.user.username%> <b class="caret"></b></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Logged in as <%=session.user.username%> <b class="caret"></b>
+                        </a>
                         <ul class="dropdown-menu">
+                            <li><a href="/account/settings" class="<%=(pageInfos.id === 'page-settings' ? 'active': '') %>">Settings</a></li>
                             <li><a href="/logout">Log out</a></li>
                         </ul>
                     </li>
                 </ul>
                 <% } %>
-            </div><!--/.navbar-collapse -->
+            </div>
         </div>
     </div>
 
