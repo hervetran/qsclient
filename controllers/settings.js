@@ -33,7 +33,7 @@ module.exports = function(app) {
               class: '',
               title: 'QSClient - Settings'
             },
-            error: 'You must provide : ' + errMsg
+            message: { error: 'You must provide : ' + errMsg }
           }
         });
         return false;
@@ -64,7 +64,8 @@ module.exports = function(app) {
                 id: 'page-settings',
                 class: '',
                 title: 'QSClient - Settings'
-              }
+              },
+              message: { success: 'Your settings has been updated.'}
             }
           });
         });

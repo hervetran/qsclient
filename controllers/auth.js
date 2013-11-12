@@ -56,7 +56,7 @@ module.exports = function(app) {
               title: 'QSClient - Login'
             }
           },
-          error: 'API message : ' + dataUser.error
+          message : { error: 'Error : ' + dataUser.error }
         });
       }
 
@@ -125,7 +125,7 @@ module.exports = function(app) {
             }
           },
           user: user,
-          error: 'You must provide : ' + errMsg
+          message: { error: 'You must provide : ' + errMsg }
         });
         return false;
       }

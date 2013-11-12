@@ -5,6 +5,9 @@
             <div class="col-lg-6 col-lg-offset-3">
                 <form action="<%=host%>/login" id="form-login" method="post">
                     <h1>Connect to QS platform</h1>
+
+                    <% include ../templates/messages.html %>
+
                     <p>
                         <input type="text" name="user[name]" class="form-control" placeholder="Username" autofocus="">
                     </p>

@@ -7,6 +7,8 @@
 
             <h1>Signup to QS platform</h1>
 
+            <% include ../templates/messages.html %>
+
             <p>
                 <input type="text" name="user[name]" class="form-control" value="<%=(typeof user !== 'undefined' && typeof user.name !== 'undefined' ? user.name : '')%>" placeholder="Username" autofocus="">
             </p>
