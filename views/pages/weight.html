@@ -1,0 +1,51 @@
+<% include ../layout/header.html %>
+
+<!-- Example row of columns -->
+<div class="row">
+
+    <% include ../layout/sidebar.html %>
+
+    <div class="col-lg-9">
+
+        <div class="page-header">
+            <h1>Weight <small>- Your data</small></h1>
+        </div>
+
+        <% include ../templates/messages.html %>
+
+        <% if(typeof weights !== 'undefined' && weights.length > 0) {%>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Value</th>
+                <th>Unit</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody class="qs-item-container">
+            <% include ../templates/weight.html %>
+            </tbody>
+        </table>
+        <% } %>
+
+        <form method="post" class="qs-submit form-inline well" action="<%=host%>/weight" role="form">
+            <p>Add new weight data</p>
+            <div class="form-group">
+                <input type="text" name="weight[value]" class="form-control" id="value" placeholder="Value">
+            </div>
+            <div class="form-group">
+                <select id="unit" name="weight[unit]" class="form-control">
+                    <option value="kg">kilograms (kg)</option>
+                    <option value="lb">pounds (lg)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+    </div>
+
+</div>
+
+<% include ../layout/footer.html %>

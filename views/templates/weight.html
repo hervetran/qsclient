@@ -1,0 +1,10 @@
+<% for(var i=0; i<weights.length; i++) { %>
+<tr class="qs-item">
+    <td><%=weights[i].code%></td>
+    <td><strong><%=weights[i].value%></strong></td>
+    <td><%=weights[i].unit%></td>
+    <% var date = new Date(weights[i].created_at).toDateString(); %>
+    <td><%=date%></td>
+    <td><a href="<%=host%>/weight/<%=weights[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
+</tr>
+<% } %>
