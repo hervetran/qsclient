@@ -4,7 +4,8 @@ module.exports = function(app) {
   var auth = require('../controllers/auth')(app)
     , index = require('../controllers/index')(app)
     , settings = require('../controllers/settings')(app)
-    , weight = require('../controllers/weight')(app);
+    , weight = require('../controllers/weight')(app)
+    , height = require('../controllers/height')(app);
 
   // Index
   app.get('/', checkLogin, index.getIndex);
@@ -25,6 +26,11 @@ module.exports = function(app) {
   app.get('/weight', checkLogin, weight.getWeights);
   app.post('/weight', checkLogin, weight.postWeight);
   app.post('/weight/:weightId/delete', checkLogin, weight.deleteWeight);
+
+  // Height
+  app.get('/height', checkLogin, weight.getHeights);
+  app.post('/height', checkLogin, weight.postHeight);
+  app.post('/height/:heightId/delete', checkLogin, weight.deleteHeight);
 
   function checkLogin(req, res, next) {
     if (

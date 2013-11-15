@@ -8,7 +8,7 @@
     <div class="col-lg-9">
 
         <div class="page-header">
-            <h1>Weight <small>- Your data</small></h1>
+            <h1>Height <small>- Your data</small></h1>
         </div>
 
         <% include ../templates/messages.html %>
@@ -24,21 +24,21 @@
             </tr>
             </thead>
             <tbody class="qs-item-container">
-            <% if(typeof weights !== 'undefined' && weights.length > 0) {%>
-                <% include ../templates/weight.html %>
+            <% if(typeof heights !== 'undefined' && heights.length > 0) {%>
+            <% include ../templates/height.html %>
             <% } %>
             </tbody>
         </table>
 
-        <form method="post" class="qs-submit form-inline well" action="<%=host%>/weight" role="form">
-            <p>Add new weight data</p>
+        <form method="post" class="qs-submit form-inline well" action="<%=host%>/height" role="form">
+            <p>Add new height data</p>
             <div class="form-group">
-                <input type="text" name="weight[value]" class="form-control" id="value" placeholder="Value">
+                <input type="text" name="height[value]" class="form-control" id="value" placeholder="Value">
             </div>
             <div class="form-group">
-                <select id="unit" name="weight[unit]" class="form-control">
-                    <option value="kg">kilograms (kg)</option>
-                    <option value="lb">pounds (lg)</option>
+                <select id="unit" name="height[unit]" class="form-control">
+                    <option value="cm">centimeters (cm)</option>
+                    <option value="in">inches (in)</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Add</button>
