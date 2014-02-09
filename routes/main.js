@@ -5,7 +5,8 @@ module.exports = function(app) {
     , index = require('../controllers/index')(app)
     , settings = require('../controllers/settings')(app)
     , weight = require('../controllers/weight')(app)
-    , height = require('../controllers/height')(app);
+    , height = require('../controllers/height')(app)
+    , sleep = require('../controllers/sleep')(app);
 
   // Index
   app.get('/', checkLogin, index.getIndex);
@@ -31,6 +32,11 @@ module.exports = function(app) {
   app.get('/height', checkLogin, weight.getHeights);
   app.post('/height', checkLogin, weight.postHeight);
   app.post('/height/:heightId/delete', checkLogin, weight.deleteHeight);
+
+  // Sleep
+  app.get('/sleep', checkLogin, sleep.getSleep);
+  app.post('/sleep', checkLogin, sleep.postSleep);
+  app.post('/sleep/:sleepId/delete', checkLogin, sleep.deleteSleep);
 
   function checkLogin(req, res, next) {
     if (

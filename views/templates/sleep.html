@@ -1,0 +1,11 @@
+<% for(var i=0; i<sleeps.length; i++) { %>
+<% function dateToStrong(date) {
+  return new Date(date).toGMTString();
+} %>
+<tr class="qs-item">
+    <td><%= sleeps[i].code %></td>
+    <td><%= dateToStrong(sleeps[i].start) %></td>
+    <td><%= dateToStrong(sleeps[i].end) %></td>
+    <td><a href="<%=host%>/sleep/<%= sleeps[i].code %>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
+</tr>
+<% } %>

@@ -10,6 +10,9 @@ var qs = {
 
 $(function() {
 
+  $('.datepicker').datepicker();
+  $('.timepicker').timepicker();
+
   $('body').on('click', '.qs-confirmation', function () {
     return confirm('Are you sure?');
   });
