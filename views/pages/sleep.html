@@ -1,5 +1,13 @@
 <% include ../layout/header.html %>
 
+<style>
+    #chart {
+        margin: 10px 10px 10px 10px;
+        width: 2000px;
+        height: 400px;
+    }
+</style>
+
 <!-- Example row of columns -->
 <div class="row">
 
@@ -13,21 +21,7 @@
 
         <% include ../templates/messages.html %>
 
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>Code</th>
-                <th>Start</th>
-                <th>End</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody class="qs-item-container">
-            <% if(typeof sleeps !== 'undefined' && sleeps.length > 0) {%>
-                <% include ../templates/sleep.html %>
-            <% } %>
-            </tbody>
-        </table>
+        <div id="chart"></div>
 
         <form method="post" class="qs-submit form-inline well" action="<%=host%>/sleep" role="form">
             <p>Add new sleep data</p>
@@ -51,5 +45,42 @@
     </div>
 
 </div>
+
+<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
+
+<script type="text/javascript">
+    var values = JSON.parse('<%- JSON.stringify(chart) %>');
+    YUI().use('charts', function (Y) {
+        var mychart = new Y.Chart({
+            dataProvider: values,
+            render: '#chart',
+            styles: {
+                axes: {
+                    date: {
+                        label: {
+                            rotation: -45
+                        }
+                    }
+                }
+            },
+            categoryKey:"date",
+            categoryType:"time",
+            horizontalGridlines: {
+                styles: {
+                    line: {
+                        color: "#dad8c9"
+                    }
+                }
+            },
+            verticalGridlines: {
+                styles: {
+                    line: {
+                        color: "#dad8c9"
+                    }
+                }
+            }
+        });
+    });
+</script>
 
 <% include ../layout/footer.html %>

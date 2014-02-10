@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , _ = require('lodash');
 
   var Sleep = {};
 
@@ -26,7 +27,8 @@ module.exports = function(app) {
             class: '',
             title: 'QSClient - Sleep'
           },
-          sleeps: dataSleeps
+          sleeps: dataSleeps,
+          chart: sleepsToChart(dataSleeps)
         }
       });
 
@@ -123,6 +125,25 @@ module.exports = function(app) {
     date.setMinutes(parseInt(timeValues[1], 10));
     date.setSeconds(0);
     return date;
+  }
+
+  function sleepsToChart(sleeps) {
+    var values = [];
+    _.map(sleeps, function(sleep) {
+      var value = {},
+          start = new Date(sleep.start),
+          end = new Date(sleep.end);
+      value.date = end.getFullYear() + '/' + end.getMonth() + '/' + end.getDate();
+      value.minutes = diff(start, end);
+      values.push(value);
+    })
+
+    function diff(start, end) {
+      var diffMs = (end - start);
+      return Math.round(diffMs / (1000 * 60));
+    }
+
+    return values;
   }
 
   return Sleep;
