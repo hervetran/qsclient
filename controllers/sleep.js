@@ -28,7 +28,7 @@ module.exports = function(app) {
             title: 'QSClient - Sleep'
           },
           sleeps: dataSleeps,
-          chart: sleepsToChart(dataSleeps)
+          minutesChart: sleepsToChart(dataSleeps)
         }
       });
 
@@ -133,8 +133,8 @@ module.exports = function(app) {
       var value = {},
           start = new Date(sleep.start),
           end = new Date(sleep.end);
-      value.date = end.getFullYear() + '/' + end.getMonth() + '/' + end.getDate();
-      value.minutes = diff(start, end);
+      value.date = (end.getMonth() + 1) + '/' + end.getDate() + '/' + end.getFullYear();
+      value.values = diff(start, end);
       values.push(value);
     })
 

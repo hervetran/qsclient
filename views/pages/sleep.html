@@ -1,9 +1,9 @@
 <% include ../layout/header.html %>
 
 <style>
-    #chart {
+    #minutes {
         margin: 10px 10px 10px 10px;
-        width: 2000px;
+        width: 100%;
         height: 400px;
     }
 </style>
@@ -21,7 +21,7 @@
 
         <% include ../templates/messages.html %>
 
-        <div id="chart"></div>
+        <div id="minutes"></div>
 
         <form method="post" class="qs-submit form-inline well" action="<%=host%>/sleep" role="form">
             <p>Add new sleep data</p>
@@ -49,11 +49,11 @@
 <script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
 
 <script type="text/javascript">
-    var values = JSON.parse('<%- JSON.stringify(chart) %>');
+    var values = JSON.parse('<%- JSON.stringify(minutesChart) %>');
     YUI().use('charts', function (Y) {
         var mychart = new Y.Chart({
             dataProvider: values,
-            render: '#chart',
+            render: '#minutes',
             styles: {
                 axes: {
                     date: {
@@ -64,21 +64,7 @@
                 }
             },
             categoryKey:"date",
-            categoryType:"time",
-            horizontalGridlines: {
-                styles: {
-                    line: {
-                        color: "#dad8c9"
-                    }
-                }
-            },
-            verticalGridlines: {
-                styles: {
-                    line: {
-                        color: "#dad8c9"
-                    }
-                }
-            }
+            categoryType:"time"
         });
     });
 </script>
