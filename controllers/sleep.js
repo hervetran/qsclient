@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   var Sleep = {};
 
-  Sleep.getSleep = function(req, res, next) {
+  Sleep.getSleeps = function(req, res, next) {
 
     var apiCall = new API(req);
     apiCall.get(

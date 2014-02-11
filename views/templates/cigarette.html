@@ -1,0 +1,10 @@
+<% for(var i=0; i<cigarettes.length; i++) { %>
+<tr class="qs-item">
+    <td><%=cigarettes[i].code%></td>
+    <td><strong><%=cigarettes[i].quantity%></strong></td>
+    <td><%=cigarettes[i].date%></td>
+    <% var date = new Date(cigarettes[i].created_at).toDateString(); %>
+    <td><%=date%></td>
+    <td><a href="<%=host%>/cigarette/<%=cigarettes[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
+</tr>
+<% } %>
