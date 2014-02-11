@@ -28,7 +28,7 @@ module.exports = function(app) {
             title: 'QSClient - Sleep'
           },
           sleeps: dataSleeps,
-          minutesChart: sleepsToChart(dataSleeps)
+          charts: sleepsToCharts(dataSleeps)
         }
       });
 
@@ -127,15 +127,23 @@ module.exports = function(app) {
     return date;
   }
 
-  function sleepsToChart(sleeps) {
-    var values = [];
+  function sleepsToCharts(sleeps) {
+    var minutes = [],
+        more = 0,
+        less = 0;
     _.map(sleeps, function(sleep) {
       var value = {},
           start = new Date(sleep.start),
           end = new Date(sleep.end);
       value.date = (end.getMonth() + 1) + '/' + end.getDate() + '/' + end.getFullYear();
-      value.values = diff(start, end);
-      values.push(value);
+      var d = diff(start, end);
+      value.values = d;
+      if(d >= 360) {
+        more++;
+      } else {
+        less++;
+      }
+      minutes.push(value);
     })
 
     function diff(start, end) {
@@ -143,7 +151,13 @@ module.exports = function(app) {
       return Math.round(diffMs / (1000 * 60));
     }
 
-    return values;
+    return {
+      minutes: minutes,
+      pie: {
+        more: (more * 100) / sleeps.length,
+        less: (less * 100) / sleeps.length
+      }
+    };
   }
 
   return Sleep;

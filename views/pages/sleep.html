@@ -6,6 +6,11 @@
         width: 100%;
         height: 400px;
     }
+    #pie {
+        margin: 10px 10px 10px 10px;
+        width: 100%x;
+        height: 400px;
+    }
 </style>
 
 <!-- Example row of columns -->
@@ -21,7 +26,13 @@
 
         <% include ../templates/messages.html %>
 
+        <h2>Minutes of sleep per day</h2>
+
         <div id="minutes"></div>
+
+        <h2>Over than 6 hours of sleep a day</h2>
+
+        <div id="pie"></div>
 
         <form method="post" class="qs-submit form-inline well" action="<%=host%>/sleep" role="form">
             <p>Add new sleep data</p>
@@ -49,22 +60,26 @@
 <script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
 
 <script type="text/javascript">
-    var values = JSON.parse('<%- JSON.stringify(minutesChart) %>');
+    var minutes = JSON.parse('<%- JSON.stringify(charts.minutes) %>');
+    var pie = JSON.parse('<%- JSON.stringify(charts.pie) %>');
+
     YUI().use('charts', function (Y) {
         var mychart = new Y.Chart({
-            dataProvider: values,
+            dataProvider: minutes,
             render: '#minutes',
-            styles: {
-                axes: {
-                    date: {
-                        label: {
-                            rotation: -45
-                        }
-                    }
-                }
-            },
+            styles: { axes: { date: { label: { rotation: -45 } } } },
             categoryKey:"date",
             categoryType:"time"
+        });
+
+        Y.PieSeries.prototype._defaultSliceColors =  ["green", "red"];
+        var pieGraph = new Y.Chart({
+            render: '#pie',
+            categoryKey: 'k',
+            seriesKeys: ['val'],
+            dataProvider: [{k: 'more', val: pie.more},{k: 'less', val: pie.less}],
+            type: 'pie',
+            seriesCollection: [  categoryKey: 'k', valueKey: 'val' } ]
         });
     });
 </script>
