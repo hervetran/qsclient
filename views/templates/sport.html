@@ -1,0 +1,11 @@
+<% for(var i=0; i<sports.length; i++) { %>
+<tr class="qs-item">
+    <td><%=sports[i].code%></td>
+    <td><strong><%=sports[i].type%></strong></td>
+    <td><%=sports[i].duration%></td>
+    <td><%=sports[i].date%></td>
+    <% var date = new Date(sports[i].created_at).toDateString(); %>
+    <td><%=date%></td>
+    <td><a href="<%=host%>/sport/<%=sports[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
+</tr>
+<% } %>

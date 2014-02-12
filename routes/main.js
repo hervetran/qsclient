@@ -7,7 +7,8 @@ module.exports = function(app) {
     , weight = require('../controllers/weight')(app)
     , height = require('../controllers/height')(app)
     , sleep = require('../controllers/sleep')(app)
-    , cigarette = require('../controllers/cigarette')(app);
+    , cigarette = require('../controllers/cigarette')(app)
+    , sport = require('../controllers/sport')(app);
 
   // Index
   app.get('/', checkLogin, index.getIndex);
@@ -43,6 +44,11 @@ module.exports = function(app) {
   app.get('/cigarette', checkLogin, cigarette.getCigarettes);
   app.post('/cigarette', checkLogin, cigarette.postCigarette);
   app.post('/cigarette/:cigaretteId/delete', checkLogin, cigarette.deleteCigarette);
+
+  // Sport
+  app.get('/sport', checkLogin, sport.getSports);
+  app.post('/sport', checkLogin, sport.postSport);
+  app.post('/sport/:sportId/delete', checkLogin, sport.deleteSport);
 
   function checkLogin(req, res, next) {
     if (

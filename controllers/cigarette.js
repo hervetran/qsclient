@@ -75,7 +75,15 @@ module.exports = function(app) {
 
     function defineValidators(req) {
       return [
-        {str: req.body.cigarette.quantity, msg: ' a valid quantity value', method: 'isDecimal()'}
+        {
+          str: req.body.cigarette.quantity,
+          msg: ' a valid quantity value',
+          method: 'isDecimal()'
+        }, {
+          str: formToDate(cigarette.date, cigarette.time),
+          msg: ' an valid date',
+          method: 'isDate()'
+        }
       ];
     }
 

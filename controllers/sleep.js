@@ -83,12 +83,12 @@ module.exports = function(app) {
       var sleep = req.body.sleep;
       return [
         {
-          str: formToDate(sleep.start_date, sleep.start_time),
-          msg: ' a valid sleep start date',
-          method: 'isDate()'
+          str: req.body.cigarette.quantity,
+          msg: ' a valid quantity value',
+          method: 'isDecimal()'
         }, {
           str: formToDate(sleep.end_date, sleep.end_time),
-          msg: ' an valid sleep end date',
+          msg: ' a valid sleep end date',
           method: 'isDate()'
         }
       ];
