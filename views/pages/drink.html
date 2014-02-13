@@ -1,0 +1,52 @@
+<% include ../layout/header.html %>
+
+<!-- Example row of columns -->
+<div class="row">
+
+    <% include ../layout/sidebar.html %>
+
+    <div class="col-lg-9">
+
+        <div class="page-header">
+            <h1>Weight <small>- Your data</small></h1>
+        </div>
+
+        <% include ../templates/messages.html %>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Type</th>
+                <th>Quantity</th>
+                <th>Unit</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody class="qs-item-container">
+            <% if(typeof drinks !== 'undefined' && drinks.length > 0) {%>
+                <% include ../templates/drink.html %>
+            <% } %>
+            </tbody>
+        </table>
+
+        <form method="post" class="qs-submit form-inline well" action="<%=host%>/drink" role="form">
+            <p>Add new drink data</p>
+            <div class="form-group">
+                <input type="text" name="drink[value]" class="form-control" id="value" placeholder="Value">
+            </div>
+            <div class="form-group">
+                <select id="unit" name="drink[unit]" class="form-control">
+                    <option value="kg">kilograms (kg)</option>
+                    <option value="lb">pounds (lg)</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+    </div>
+
+</div>
+
+<% include ../layout/footer.html %>

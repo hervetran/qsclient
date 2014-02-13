@@ -7,6 +7,7 @@ module.exports = function(app) {
     , weight = require('../controllers/weight')(app)
     , height = require('../controllers/height')(app)
     , sleep = require('../controllers/sleep')(app)
+    , drink = require('../controllers/drink')(app)
     , cigarette = require('../controllers/cigarette')(app)
     , sport = require('../controllers/sport')(app);
 
@@ -39,6 +40,11 @@ module.exports = function(app) {
   app.get('/sleep', checkLogin, sleep.getSleeps);
   app.post('/sleep', checkLogin, sleep.postSleep);
   app.post('/sleep/:sleepId/delete', checkLogin, sleep.deleteSleep);
+
+  // Drink
+  app.get('/drink', checkLogin, drink.getDrinks);
+  app.post('/drink', checkLogin, drink.postDrink);
+  app.post('/drink/:sleepId/delete', checkLogin, drink.deleteDrink);
 
   // Cigarette
   app.get('/cigarette', checkLogin, cigarette.getCigarettes);
