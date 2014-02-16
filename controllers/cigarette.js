@@ -2,7 +2,8 @@ module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
     , API = require('../lib/api.js').API
-    , Util = require('../lib/util.js');
+    , Util = require('../lib/util.js')
+    , _ = require('lodash');
 
   this.getCigarettes = function(req, res, next) {
 
@@ -24,7 +25,8 @@ module.exports = function(app) {
             class: '',
             title: 'QSClient - Cigarette'
           },
-          cigarettes: dataCigarettes
+          cigarettes: dataCigarettes,
+          chart: JSON.stringify(toChart(dataCigarettes))
         }
       });
 
@@ -107,6 +109,19 @@ module.exports = function(app) {
     });
 
   };
+
+  function toChart(cigarettes) {
+      var arr = [];
+      _.each(cigarettes, function(cigarette) {
+          var date = new Date(cigarette.date);
+          var obj = {
+              date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
+              cigarettes: cigarette.quantity
+          };
+          arr.push(obj);
+      });
+    return arr;
+  }
 
   return this;
 
