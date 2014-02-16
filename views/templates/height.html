@@ -3,7 +3,7 @@
     <td><%=heights[i].code%></td>
     <td><strong><%=heights[i].value%></strong></td>
     <td><%=heights[i].unit%></td>
-    <% var date = new Date(heights[i].created_at).toDateString(); %>
+    <% var date = new Date(heights[i].date).toDateString(); %>
     <td><%=date%></td>
     <td><a href="<%=host%>/height/<%=heights[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
 </tr>

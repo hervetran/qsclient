@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , Util = require('../lib/util.js');
 
   this.getDrinks = function(req, res, next) {
 
@@ -44,7 +45,8 @@ module.exports = function(app) {
 
       var dataToSend = {
         value: drink.value,
-        unit: drink.unit
+        unit: drink.unit,
+        date: Util.formToDate(drink.date, drink.time)
       };
 
       var apiCall = new API(req);

@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , Util = require('../lib/util.js');
 
   this.getWeights = function(req, res, next) {
 
@@ -44,7 +45,8 @@ module.exports = function(app) {
 
       var dataToSend = {
         value: weight.value,
-        unit: weight.unit
+        unit: weight.unit,
+        date: Util.formToDate(weight.date, weight.time)
       };
 
       var apiCall = new API(req);
@@ -74,9 +76,23 @@ module.exports = function(app) {
     });
 
     function defineValidators(req) {
+      var weight = req.body.weight;
       return [
-        {str: req.body.weight.value, msg: ' a valid weight value', method: 'isDecimal()'},
-        {str: req.body.weight.unit, msg: ' an valid weight unit type', method: 'notNull()'}
+        {
+          str: weight.value,
+          msg: ' a valid weight value',
+          method: 'isDecimal()'
+        },
+        {
+          str: weight.unit,
+          msg: ' an valid weight unit type',
+          method: 'notNull()'
+        },
+        {
+          str: Util.formToDate(weight.date, weight.time),
+          msg: ' an valid date',
+          method: 'isDate()'
+        }
       ];
     }
 
