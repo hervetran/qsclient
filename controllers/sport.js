@@ -2,6 +2,7 @@ module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
     , API = require('../lib/api.js').API
+    , _ = require('lodash')
     , Util = require('../lib/util.js');
 
   this.getSports = function(req, res, next) {
@@ -24,7 +25,9 @@ module.exports = function(app) {
             class: '',
             title: 'QSClient - Sport'
           },
-          sports: dataSports
+          sports: dataSports,
+          chart: JSON.stringify(toChart(dataSports)),
+          pie: JSON.stringify(toPie(dataSports))
         }
       });
 
@@ -112,6 +115,49 @@ module.exports = function(app) {
     });
 
   };
+
+  function toChart(sports) {
+    var arr = [];
+    _.map(sports, function(sport) {
+      var date = new Date(sport.date)
+        , month = date.getMonth() + 1
+        , type = sport.type;
+      date.setDate(1);
+      var stringDate = month + '/' + date.getDate() + '/' + date.getFullYear();
+      var i = _.filter(_.map(arr, function(el, i) {
+                                    if(el.date === stringDate) { return i; }
+                                  }), function(el) {
+                                        return el !== undefined;
+                                      });
+      if(i.length > 0) {
+        var it = i[0];
+        var value = arr[it][type] || 0;
+        arr[it][type] = value + sport.duration;
+      } else {
+        var obj = { date: stringDate };
+        obj[type] = sport.duration;
+        arr.push(obj);
+      }
+    });
+    return arr;
+  }
+
+  function toPie(sports) {
+    var obj = {};
+    _.map(sports, function(sport) {
+      var type = sport.type;
+      var objType = obj[type];
+      var value = typeof objType !== 'undefined' ? objType.value : 0;
+      value += sport.duration;
+      obj[type] = {
+        type: type,
+        value: value
+      };
+    });
+    return _.map(_.keys(obj), function(k) {
+      return obj[k];
+    });
+  }
 
   return this;
 

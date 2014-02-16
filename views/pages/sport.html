@@ -1,6 +1,19 @@
 <% include ../layout/header.html %>
 
-<!-- Example row of columns -->
+<style>
+    #chart {
+        margin: 10px 10px 10px 10px;
+        width: 100%;
+        max-width: 800px;
+        height: 400px;
+    }
+    #pie {
+        margin: 10px 10px 10px 10px;
+        width: 100%;
+        height: 400px;
+    }
+</style>
+
 <div class="row">
 
     <% include ../layout/sidebar.html %>
@@ -12,6 +25,12 @@
         </div>
 
         <% include ../templates/messages.html %>
+
+        <h2>Sports for each month</h2>
+        <div id="chart"></div>
+
+        <h2>Sport repartition</h2>
+        <div id="pie"></div>
 
         <table class="table table-striped">
             <thead>
@@ -51,5 +70,68 @@
     </div>
 
 </div>
+
+<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
+
+<script type="text/javascript">
+
+    var chartValues = JSON.parse('<%- chart %>');
+    var pieValues = JSON.parse('<%- pie %>');
+
+    YUI().use('charts', function (Y) {
+
+        var axes = {
+            financials:{
+                keys: ['Football', 'Handball', 'Basketball', 'Running', 'Byclicle', 'Tennis'],
+                position: 'right',
+                type: 'numeric',
+                styles:{
+                    majorTicks:{
+                        display: 'none'
+                    }
+                }
+            },
+            dateRange:{
+                keys: ['date'],
+                position: 'bottom',
+                type: 'category',
+                styles:{
+                    majorTicks:{ display: 'none' },
+                    label: { rotation:-45, margin: { top:5 } }
+                }
+            }
+        };
+
+        new Y.Chart({
+            type: 'column',
+            categoryKey: 'date',
+            dataProvider: chartValues,
+            axes: axes,
+            horizontalGridlines: true,
+            verticalGridlines: true,
+            legend: { postion: 'right' },
+            seriesCollection: [
+                  { xKey: 'date', yKey: 'Football', yDisplayName: 'Football' }
+                , { xKey: 'date', yKey: 'Handball', yDisplayName: 'Handball' }
+                , { xKey: 'date', yKey: 'Basketball', yDisplayName: 'Basketball' }
+                , { xKey: 'date', yKey: 'Running', yDisplayName: 'Running' }
+                , { xKey: 'date', yKey: 'Byclicle', yDisplayName: 'Byclicle' }
+                , { xKey: 'date', yKey: 'Tennis', yDisplayName: 'Tennis' }
+            ],
+            render: '#chart'
+        });
+
+        new Y.Chart({
+            render: '#pie',
+            categoryKey: 'type',
+            seriesKeys: ['value'],
+            dataProvider: pieValues,
+            type: 'pie',
+            seriesCollection:[ { categoryKey: 'type', valueKey: 'value' }
+            ]
+        });
+    });
+
+</script>
 
 <% include ../layout/footer.html %>

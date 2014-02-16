@@ -1,3 +1,5 @@
+'use strict';
+
 var qs = {
   displayError: function(error){
     var alert = '<div class="alert alert-block alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h4>Error !</h4><p>'+error+'</p></div>';
@@ -28,7 +30,7 @@ $(function() {
         });
       },
       error: function(data) {
-        var data = JSON.parse(data.responseText);
+        data = JSON.parse(data.responseText);
         if(typeof data.error !== 'undefined'){
           qs.displayError(data.error);
         }
@@ -48,7 +50,7 @@ $(function() {
         $('.qs-item-container').append(data);
       },
       error: function(data) {
-        var data = JSON.parse(data.responseText);
+        data = JSON.parse(data.responseText);
         if(typeof data.error !== 'undefined'){
           qs.displayError(data.error);
         }

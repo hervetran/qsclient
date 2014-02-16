@@ -1,11 +1,16 @@
 <% for(var i=0; i<weights.length; i++) { %>
-<% var date = new Date(weights[i].date);%>
+<% var weight = weights[i]; %>
+<% var date = new Date(weight.date);%>
 <tr class="qs-item">
-    <td><%=weights[i].code%></td>
-    <td><strong><%=weights[i].value%></strong></td>
-    <td><%=weights[i].unit%></td>
+    <td><%=weight.code%></td>
+    <td><strong><%=weight.value%></strong></td>
+    <td><%=weight.unit%></td>
     <td><%=date.toLocaleDateString()%></td>
     <td><%=date.toLocaleTimeString()%></td>
-    <td><a href="<%=host%>/weight/<%=weights[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
+    <td>
+        <a href="<%=host%>/weight/<%=weight.code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">
+            Delete
+        </a>
+    </td>
 </tr>
 <% } %>
