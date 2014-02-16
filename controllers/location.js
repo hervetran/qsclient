@@ -45,10 +45,6 @@ module.exports = function(app) {
 
       var dataToSend = {
         name: location.name,
-        address: location.duration,
-        city: location.cty,
-        postalCode: location.postalCode,
-        country: location.country,
         lat: location.lat,
         lng: location.lng,
         date: Util.formToDate(location.date, location.time)
@@ -87,22 +83,6 @@ module.exports = function(app) {
           str: location.name,
           msg: ' a valid name value',
           method: 'notEmpty()'
-        }, {
-          str: location.address,
-          msg: ' a valid address value',
-          method: 'notEmpty()'
-        }, {
-          str: location.city,
-          msg: ' a valid city value',
-          method: 'notEmpty()'
-        }, {
-          str: location.postalCode,
-          msg: ' a valid postal code value',
-          method: 'isDecimal()'
-        }, {
-          str: location.country,
-          msg: ' a valid duration value',
-          method: 'isDecimal()'
         }, {
           str: location.lat,
           msg: ' a valid latitude value',

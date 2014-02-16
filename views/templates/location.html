@@ -2,14 +2,11 @@
 <tr class="qs-item">
     <td><%=locations[i].code%></td>
     <td><strong><%=locations[i].name%></strong></td>
-    <td><%=locations[i].address%></td>
-    <td><%=locations[i].city%></td>
-    <td><%=locations[i].postalCode%></td>
-    <td><%=locations[i].country%></td>
     <td><%=locations[i].lat%></td>
     <td><%=locations[i].lng%></td>
-    <% var date = new Date(locations[i].date).toDateString(); %>
-    <td><%=date%></td>
+    <% var date = new Date(locations[i].date);%>
+    <td><%=date.toLocaleDateString()%></td>
+    <td><%=date.toLocaleTimeString()%></td>
     <td><a href="<%=host%>/location/<%=locations[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
 </tr>
 <% } %>

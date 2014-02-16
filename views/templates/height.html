@@ -1,10 +1,11 @@
 <% for(var i=0; i<heights.length; i++) { %>
+<% var date = new Date(heights[i].date);%>
 <tr class="qs-item">
     <td><%=heights[i].code%></td>
     <td><strong><%=heights[i].value%></strong></td>
     <td><%=heights[i].unit%></td>
-    <% var date = new Date(heights[i].date).toDateString(); %>
-    <td><%=date%></td>
+    <td><%=date.toLocaleDateString()%></td>
+    <td><%=date.toLocaleTimeString()%></td>
     <td><a href="<%=host%>/height/<%=heights[i].code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
 </tr>
 <% } %>

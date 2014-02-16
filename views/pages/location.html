@@ -18,13 +18,10 @@
             <tr>
                 <th>Code</th>
                 <th>Name</th>
-                <th>Address</th>
-                <th>City</th>
-                <th>Postal code</th>
-                <th>Country</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Date</th>
+                <th>Time</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -44,13 +41,10 @@
                 <input type="text" name="location[address]" class="form-control" id="address" placeholder="Address">
             </div>
             <div class="form-group">
-                <input type="text" name="location[city]" class="form-control" id="city" placeholder="City">
+                <input type="text" name="location[lat]" class="form-control" id="latitude" placeholder="Latitude" readonly>
             </div>
             <div class="form-group">
-                <input type="text" name="location[postalCode]" class="form-control" id="postal-code" placeholder="Postal code">
-            </div>
-            <div class="form-group">
-                <input type="text" name="location[country]" class="form-control" id="country" placeholder="Country">
+                <input type="text" name="location[lng]" class="form-control" id="longitude" placeholder="Longitude" readonly>
             </div>
             <div class="form-group">
                 <div class="bfh-datepicker" data-name="location[date]"></div>
