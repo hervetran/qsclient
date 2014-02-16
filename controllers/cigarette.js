@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , Util = require('../lib/util.js');
 
   this.getCigarettes = function(req, res, next) {
 
@@ -44,7 +45,7 @@ module.exports = function(app) {
 
       var dataToSend = {
         quantity: cigarette.quantity,
-        date: formToDate(cigarette.date, cigarette.time)
+        date: Util.formToDate(cigarette.date, cigarette.time)
       };
 
       var apiCall = new API(req);
@@ -74,13 +75,14 @@ module.exports = function(app) {
     });
 
     function defineValidators(req) {
+      var cigarette = req.body.cigarette;
       return [
         {
-          str: req.body.cigarette.quantity,
+          str: cigarette.quantity,
           msg: ' a valid quantity value',
           method: 'isDecimal()'
         }, {
-          str: formToDate(cigarette.date, cigarette.time),
+          str: Util.formToDate(cigarette.date, cigarette.time),
           msg: ' an valid date',
           method: 'isDate()'
         }
@@ -105,18 +107,6 @@ module.exports = function(app) {
     });
 
   };
-
-  function formToDate(date, time) {
-    var dateValues = date.split('/');
-    var timeValues = time.split(':');
-    var isAfternoon = timeValues[1].split(' ')[1] == 'PM';
-    timeValues[1] = timeValues[1].split(' ')[0];
-    var date = new Date(parseInt(dateValues[2], 10), parseInt(dateValues[0], 10) - 1, parseInt(dateValues[1], 10));
-    date.setHours(parseInt(timeValues[0], 10) + (isAfternoon ? 12 : 0));
-    date.setMinutes(parseInt(timeValues[1], 10));
-    date.setSeconds(0);
-    return date;
-  }
 
   return this;
 

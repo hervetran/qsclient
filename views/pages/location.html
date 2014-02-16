@@ -1,0 +1,71 @@
+<% include ../layout/header.html %>
+
+<!-- Example row of columns -->
+<div class="row">
+
+    <% include ../layout/sidebar.html %>
+
+    <div class="col-lg-9">
+
+        <div class="page-header">
+            <h1>Location <small>- Your data</small></h1>
+        </div>
+
+        <% include ../templates/messages.html %>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Postal code</th>
+                <th>Country</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody class="qs-item-container">
+            <% if(typeof locations !== 'undefined' && locations.length > 0) {%>
+            <% include ../templates/location.html %>
+            <% } %>
+            </tbody>
+        </table>
+
+        <form method="post" class="qs-submit well" action="<%=host%>/location" role="form">
+            <p>Add new location data</p>
+            <div class="form-group">
+                <input type="text" name="location[name]" class="form-control" id="type" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location[address]" class="form-control" id="address" placeholder="Address">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location[city]" class="form-control" id="city" placeholder="City">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location[postalCode]" class="form-control" id="postal-code" placeholder="Postal code">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location[country]" class="form-control" id="country" placeholder="Country">
+            </div>
+            <div class="form-group">
+                <input type="text" name="location[date]" class="form-control datepicker" id="date" placeholder="Date">
+            </div>
+            <div class="form-group">
+                <div class="input-append bootstrap-timepicker">
+                    <input type="text" name="location[time]" class="form-control timepicker" id="time">
+                    <span class="add-on"><i class="icon-time"></i></span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+    </div>
+
+</div>
+
+<% include ../layout/footer.html %>

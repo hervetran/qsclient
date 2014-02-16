@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , Util = require('../lib/util.js');
 
   this.getHeights = function(req, res, next) {
 
@@ -44,7 +45,8 @@ module.exports = function(app) {
 
       var dataToSend = {
         value: height.value,
-        unit: height.unit
+        unit: height.unit,
+        date: Util.formToDate(height.date, height.time)
       };
 
       var apiCall = new API(req);
@@ -74,9 +76,23 @@ module.exports = function(app) {
     });
 
     function defineValidators(req) {
+      var height = req.body.height;
       return [
-        {str: req.body.height.value, msg: ' a valid height value', method: 'isDecimal()'},
-        {str: req.body.height.unit, msg: ' an valid height unit type', method: 'notNull()'}
+        {
+          str: height.value,
+          msg: ' a valid weight value',
+          method: 'isDecimal()'
+        },
+        {
+          str: height.unit,
+          msg: ' an valid weight unit type',
+          method: 'notNull()'
+        },
+        {
+          str: Util.formToDate(height.date, height.time),
+          msg: ' an valid date',
+          method: 'isDate()'
+        }
       ];
     }
 

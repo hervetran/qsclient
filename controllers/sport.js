@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , Util = require('../lib/util.js');
 
   this.getSports = function(req, res, next) {
 
@@ -45,7 +46,7 @@ module.exports = function(app) {
       var dataToSend = {
         type: sport.type,
         duration: sport.duration,
-        date: formToDate(sport.date, sport.time)
+        date: Util.formToDate(sport.date, sport.time)
       };
 
       var apiCall = new API(req);
@@ -78,15 +79,15 @@ module.exports = function(app) {
       var sport = req.body.sport;
       return [
         {
-          str: req.body.sport.type,
+          str: sport.type,
           msg: ' a valid type value',
           method: 'notEmpty()'
         }, {
-          str: req.body.sport.duration,
+          str: sport.duration,
           msg: ' a valid duration value',
           method: 'isDecimal()'
         }, {
-          str: formToDate(sport.date, sport.time),
+          str: Util.formToDate(sport.date, sport.time),
           msg: ' a valid date',
           method: 'isDate()'
         }
@@ -111,18 +112,6 @@ module.exports = function(app) {
     });
 
   };
-
-  function formToDate(date, time) {
-    var dateValues = date.split('/');
-    var timeValues = time.split(':');
-    var isAfternoon = timeValues[1].split(' ')[1] == 'PM';
-    timeValues[1] = timeValues[1].split(' ')[0];
-    var date = new Date(parseInt(dateValues[2], 10), parseInt(dateValues[0], 10) - 1, parseInt(dateValues[1], 10));
-    date.setHours(parseInt(timeValues[0], 10) + (isAfternoon ? 12 : 0));
-    date.setMinutes(parseInt(timeValues[1], 10));
-    date.setSeconds(0);
-    return date;
-  }
 
   return this;
 

@@ -2,6 +2,7 @@ module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
     , API = require('../lib/api.js').API
+    , Util = require('../lib/util.js')
     , _ = require('lodash');
 
   var Sleep = {};
@@ -48,8 +49,8 @@ module.exports = function(app) {
       }
 
       var dataToSend = {
-        start: formToDate(sleep.start_date, sleep.start_time),
-        end: formToDate(sleep.end_date, sleep.end_time)
+        start: Util.formToDate(sleep.start_date, sleep.start_time),
+        end: Util.formToDate(sleep.end_date, sleep.end_time)
       };
 
       var apiCall = new API(req);
@@ -83,11 +84,7 @@ module.exports = function(app) {
       var sleep = req.body.sleep;
       return [
         {
-          str: req.body.cigarette.quantity,
-          msg: ' a valid quantity value',
-          method: 'isDecimal()'
-        }, {
-          str: formToDate(sleep.end_date, sleep.end_time),
+          str: Util.formToDate(sleep.end_date, sleep.end_time),
           msg: ' a valid sleep end date',
           method: 'isDate()'
         }
@@ -114,18 +111,6 @@ module.exports = function(app) {
     });
 
   };
-
-  function formToDate(date, time) {
-    var dateValues = date.split('/');
-    var timeValues = time.split(':');
-    var isAfternoon = timeValues[1].split(' ')[1] == 'PM';
-    timeValues[1] = timeValues[1].split(' ')[0];
-    var date = new Date(parseInt(dateValues[2], 10), parseInt(dateValues[0], 10) - 1, parseInt(dateValues[1], 10));
-    date.setHours(parseInt(timeValues[0], 10) + (isAfternoon ? 12 : 0));
-    date.setMinutes(parseInt(timeValues[1], 10));
-    date.setSeconds(0);
-    return date;
-  }
 
   function sleepsToCharts(sleeps) {
     var minutes = [],
