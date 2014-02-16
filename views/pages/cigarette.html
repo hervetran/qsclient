@@ -1,6 +1,14 @@
 <% include ../layout/header.html %>
 
-<!-- Example row of columns -->
+<style>
+    #chart {
+        margin: 10px 10px 10px 10px;
+        width: 100%;
+        max-width: 800px;
+        height: 400px;
+    }
+</style>
+
 <div class="row">
 
     <% include ../layout/sidebar.html %>
@@ -12,6 +20,8 @@
         </div>
 
         <% include ../templates/messages.html %>
+
+        <div id="chart"></div>
 
         <table class="table table-striped">
             <thead>
@@ -48,5 +58,25 @@
     </div>
 
 </div>
+
+<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
+
+<script type="text/javascript">
+    YUI().use('charts', function (Y)
+    {
+        //dataProvider source
+        var values = JSON.parse('<%- chart %>');
+
+        //instantiate the chart
+        new Y.Chart({
+            dataProvider: values,
+            render: '#chart',
+            styles: { axes: { date: { label: { rotation: -45 } } } },
+            categoryKey: "date",
+            categoryType: "time"
+        });
+
+    });
+</script>
 
 <% include ../layout/footer.html %>

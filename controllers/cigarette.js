@@ -1,7 +1,8 @@
 module.exports = function(app) {
 
   var Validator = require('../lib/validator.js').Validator
-    , API = require('../lib/api.js').API;
+    , API = require('../lib/api.js').API
+    , _ = require('lodash');
 
   this.getCigarettes = function(req, res, next) {
 
@@ -23,7 +24,8 @@ module.exports = function(app) {
             class: '',
             title: 'QSClient - Cigarette'
           },
-          cigarettes: dataCigarettes
+          cigarettes: dataCigarettes,
+          chart: JSON.stringify(toChart(dataCigarettes))
         }
       });
 
@@ -74,9 +76,10 @@ module.exports = function(app) {
     });
 
     function defineValidators(req) {
+      var cigarette = req.body.cigarette;
       return [
         {
-          str: req.body.cigarette.quantity,
+          str: cigarette.quantity,
           msg: ' a valid quantity value',
           method: 'isDecimal()'
         }, {
@@ -109,13 +112,26 @@ module.exports = function(app) {
   function formToDate(date, time) {
     var dateValues = date.split('/');
     var timeValues = time.split(':');
-    var isAfternoon = timeValues[1].split(' ')[1] == 'PM';
+    var isAfternoon = timeValues[1].split(' ')[1] === 'PM';
     timeValues[1] = timeValues[1].split(' ')[0];
-    var date = new Date(parseInt(dateValues[2], 10), parseInt(dateValues[0], 10) - 1, parseInt(dateValues[1], 10));
+    date = new Date(parseInt(dateValues[2], 10), parseInt(dateValues[0], 10) - 1, parseInt(dateValues[1], 10));
     date.setHours(parseInt(timeValues[0], 10) + (isAfternoon ? 12 : 0));
     date.setMinutes(parseInt(timeValues[1], 10));
     date.setSeconds(0);
     return date;
+  }
+
+  function toChart(cigarettes) {
+      var arr = [];
+      _.each(cigarettes, function(cigarette) {
+          var date = new Date(cigarette.date);
+          var obj = {
+              date: (date.getMonth() + 1) + '/' + date.getDate() + '/' + date.getFullYear(),
+              cigarettes: cigarette.quantity
+          };
+          arr.push(obj);
+      });
+    return arr;
   }
 
   return this;
