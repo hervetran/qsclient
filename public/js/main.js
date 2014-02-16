@@ -1,3 +1,5 @@
+'use strict';
+
 var qs = {
   displayError: function(error){
     var alert = '<div class="alert alert-block alert-danger fade in"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button><h4>Error !</h4><p>'+error+'</p></div>';
@@ -10,8 +12,14 @@ var qs = {
 
 $(function() {
 
-  $('.datepicker').datepicker();
-  $('.timepicker').timepicker();
+  var $datepickers = $('.datepicker');
+  var $timepickers = $('.timepicker');
+  if(typeof $datepickers.datepicker !== 'undefined') {
+    $datepickers.datepicker();
+  }
+  if(typeof $timepickers.timepicker !== 'undefined') {
+    $timepickers.timepicker();
+  }
 
   $('body').on('click', '.qs-confirmation', function () {
     return confirm('Are you sure?');
@@ -31,7 +39,7 @@ $(function() {
         });
       },
       error: function(data) {
-        var data = JSON.parse(data.responseText);
+        data = JSON.parse(data.responseText);
         if(typeof data.error !== 'undefined'){
           qs.displayError(data.error);
         }
@@ -51,7 +59,7 @@ $(function() {
         $('.qs-item-container').append(data);
       },
       error: function(data) {
-        var data = JSON.parse(data.responseText);
+        data = JSON.parse(data.responseText);
         if(typeof data.error !== 'undefined'){
           qs.displayError(data.error);
         }
