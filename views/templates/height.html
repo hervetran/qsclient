@@ -1,13 +1,14 @@
-<% for(var i=0; i < heights.length; i++) { %>
+<% for(var i=0; i<heights.length; i++) { %>
 <% var height = heights[i]; %>
-<% var date = new Date(height.created_at).toDateString(); %>
+<% var date = new Date(height.date);%>
 <tr class="qs-item">
-    <td><%= height.code %></td>
-    <td><strong><%= height.value %></strong></td>
-    <td><%= height.unit %></td>
-    <td><%= date %></td>
+    <td><%=height.code%></td>
+    <td><strong><%=height.value%></strong></td>
+    <td><%=height.unit%></td>
+    <td><%=date.toLocaleDateString()%></td>
+    <td><%=date.toLocaleTimeString()%></td>
     <td>
-        <a href="<%= host %>/height/<%= height.code %>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">
+        <a href="<%=host%>/height/<%=height.code%>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">
             Delete
         </a>
     </td>

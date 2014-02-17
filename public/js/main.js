@@ -12,15 +12,6 @@ var qs = {
 
 $(function() {
 
-  var $datepickers = $('.datepicker');
-  var $timepickers = $('.timepicker');
-  if(typeof $datepickers.datepicker !== 'undefined') {
-    $datepickers.datepicker();
-  }
-  if(typeof $timepickers.timepicker !== 'undefined') {
-    $timepickers.timepicker();
-  }
-
   $('body').on('click', '.qs-confirmation', function () {
     return confirm('Are you sure?');
   });
@@ -66,6 +57,30 @@ $(function() {
       }
     });
     return false;
+  });
+
+  $('#address').on('change', function (e) {
+    var self = $(this);
+    var address = $(this).val();
+    address = encodeURIComponent(address);
+    $.ajax({
+      url: 'http://maps.googleapis.com/maps/api/geocode/json?address='+address+'&sensor=false',
+      type:'GET',
+      datType: 'json',
+      success: function(data) {
+        if(
+          typeof data.results !== 'undefined' &&
+          typeof data.status !== 'undefined' &&
+          data.status === "OK"
+        ){
+          $('#latitude').val(data.results[0].geometry.location.lat);
+          $('#longitude').val(data.results[0].geometry.location.lng);
+        }
+      },
+      error: function(data) {
+        console.log(data);
+      }
+    });
   });
 
 });

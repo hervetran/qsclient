@@ -1,12 +1,13 @@
 <% for(var i=0; i < drinks.length; i++) { %>
 <% var drink = drinks[i] %>
+<% var date = new Date(drink.date);%>
 <tr class="qs-item">
     <td><%= drink.code %></td>
     <td><strong><%= drink.type %></strong></td>
     <td><%= drink.quantity %></td>
     <td><%= drink.unit %></td>
-    <% var date = new Date(drink.date).toDateString(); %>
-    <td><%= date %></td>
+    <td><%=date.toLocaleDateString()%></td>
+    <td><%=date.toLocaleTimeString()%></td>
     <td><a href="<%= host %>/drink/<%= drink.code %>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
 </tr>
 <% } %>

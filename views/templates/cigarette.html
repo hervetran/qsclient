@@ -1,11 +1,11 @@
 <% for(var i=0; i < cigarettes.length; i++) { %>
 <% var cigarette = cigarettes[i]; %>
-<% var date = new Date(cigarette.created_at).toDateString(); %>
+<% var date = new Date(cigarette.date);%>
 <tr class="qs-item">
     <td><%= cigarette.code %></td>
     <td><strong><%= cigarette.quantity %></strong></td>
-    <td><%= cigarette.date %></td>
-    <td><%= date %></td>
+    <td><%=date.toLocaleDateString()%></td>
+    <td><%=date.toLocaleTimeString()%></td>
     <td><a href="<%= host %>/cigarette/<%= cigarette.code %>/delete" class="btn btn-danger btn-xs qs-confirmation qs-delete" role="button">Delete</a></td>
 </tr>
 <% } %>
