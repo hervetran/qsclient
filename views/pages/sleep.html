@@ -50,22 +50,22 @@
     var minutes = JSON.parse('<%- JSON.stringify(charts.minutes) %>');
     var pie = JSON.parse('<%- JSON.stringify(charts.pie) %>');
 
-    YUI().use('charts', function (Y) {
+    YUI().use('charts-legend', function (Y) {
         var mychart = new Y.Chart({
             dataProvider: minutes,
             render: '#minutes',
             styles: { axes: { date: { label: { rotation: -45 } } } },
-            categoryKey:"date",
-            categoryType:"time"
+            categoryKey: 'date',
+            categoryType: 'time'
         });
 
-        Y.PieSeries.prototype._defaultSliceColors =  ["green", "red"];
         new Y.Chart({
             render: '#pie',
             categoryKey: 'k',
             seriesKeys: ['val'],
-            dataProvider: [{k: 'more', val: pie.more},{k: 'less', val: pie.less}],
+            dataProvider: [{k: '> 6 hours', val: pie.more},{k: '< 6 hours', val: pie.less}],
             type: 'pie',
+            legend: { position: 'right' },
             seriesCollection: [ { categoryKey: 'k', valueKey: 'val' } ]
         });
     });
