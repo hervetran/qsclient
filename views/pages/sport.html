@@ -77,18 +77,14 @@
     var chartValues = JSON.parse('<%- chart %>');
     var pieValues = JSON.parse('<%- pie %>');
 
-    YUI().use('charts', function (Y) {
+    YUI().use('charts-legend', function (Y) {
 
         var axes = {
             financials:{
                 keys: ['Football', 'Handball', 'Basketball', 'Running', 'Byclicle', 'Tennis'],
-                position: 'right',
+                position: 'left',
                 type: 'numeric',
-                styles:{
-                    majorTicks:{
-                        display: 'none'
-                    }
-                }
+                styles:{ majorTicks:{ display: 'none' } }
             },
             dateRange:{
                 keys: ['date'],
@@ -108,7 +104,7 @@
             axes: axes,
             horizontalGridlines: true,
             verticalGridlines: true,
-            legend: { postion: 'right' },
+            legend: { position: 'right' },
             seriesCollection: [
                   { xKey: 'date', yKey: 'Football', yDisplayName: 'Football' }
                 , { xKey: 'date', yKey: 'Handball', yDisplayName: 'Handball' }
@@ -126,6 +122,7 @@
             seriesKeys: ['value'],
             dataProvider: pieValues,
             type: 'pie',
+            legend: { position: 'right' },
             seriesCollection:[ { categoryKey: 'type', valueKey: 'value' }
             ]
         });
