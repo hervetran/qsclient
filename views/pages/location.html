@@ -13,6 +13,10 @@
 
         <% include ../templates/messages.html %>
 
+        <% if(typeof locations !== 'undefined' && locations.length > 0) {%>
+        <% include ../templates/map.html %>
+        <% } %>
+
         <table class="table table-striped">
             <thead>
             <tr>
