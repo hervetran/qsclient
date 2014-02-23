@@ -131,8 +131,8 @@ module.exports = function(app) {
                                       });
       if(i.length > 0) {
         var it = i[0];
-        var value = arr[it][type] || 0;
-        arr[it][type] = value + sport.duration;
+        var value = parseInt((arr[it][type] || 0), 10);
+        arr[it][type] = parseInt((value + parseInt(sport.duration, 10)), 10);
       } else {
         var obj = { date: stringDate };
         obj[type] = sport.duration;
@@ -147,8 +147,8 @@ module.exports = function(app) {
     _.map(sports, function(sport) {
       var type = sport.type;
       var objType = obj[type];
-      var value = typeof objType !== 'undefined' ? objType.value : 0;
-      value += sport.duration;
+      var value = parseInt(typeof objType !== 'undefined' ? objType.value : 0);
+      value += parseInt(sport.duration, 10);
       obj[type] = {
         type: type,
         value: value
