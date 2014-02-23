@@ -123,7 +123,7 @@ module.exports = function(app) {
       value.date = (end.getMonth() + 1) + '/' + end.getDate() + '/' + end.getFullYear();
       var d = diff(start, end);
       value.values = d;
-      if(d >= 360) {
+      if(d >= 420) {
         more++;
       } else {
         less++;
