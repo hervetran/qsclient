@@ -68,7 +68,7 @@
 
         var axes = {
             financials:{
-                keys: ['Football', 'Handball', 'Basketball', 'Running', 'Byclicle', 'Tennis'],
+                keys: ['Soccer', 'Handball', 'Basketball', 'Running', 'Bicycle', 'Tennis'],
                 position: 'left',
                 type: 'numeric',
                 styles:{ majorTicks:{ display: 'none' } }
@@ -93,11 +93,11 @@
             verticalGridlines: true,
             legend: { position: 'right' },
             seriesCollection: [
-                  { xKey: 'date', yKey: 'Football', yDisplayName: 'Football' }
+                  { xKey: 'date', yKey: 'Soccer', yDisplayName: 'Soccer' }
                 , { xKey: 'date', yKey: 'Handball', yDisplayName: 'Handball' }
                 , { xKey: 'date', yKey: 'Basketball', yDisplayName: 'Basketball' }
                 , { xKey: 'date', yKey: 'Running', yDisplayName: 'Running' }
-                , { xKey: 'date', yKey: 'Byclicle', yDisplayName: 'Byclicle' }
+                , { xKey: 'date', yKey: 'Bicycle', yDisplayName: 'Bicycle' }
                 , { xKey: 'date', yKey: 'Tennis', yDisplayName: 'Tennis' }
             ],
             render: '#chart'
